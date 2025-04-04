@@ -51,7 +51,7 @@ app.get("/register", (req, res) => {
 app.get("/secrets", async (req, res) => {
   if (req.isAuthenticated()) {
     try {
-      const user = await pool.query(`SELECT * FROM users WHERE id = $1`, [req.user.id]);
+      const user = await pool.query(`SELECT * FROM users_auth WHERE id = $1`, [req.user.id]);
       res.render("secrets.ejs", { secret: user.rows[0].secret});
     } catch (err) {
       console.error(err);
@@ -90,7 +90,7 @@ app.post("/submit", async (req, res) => {
   const secret = req.body.secret;
   const id = req.user.id;
   try {
-    await pool.query(`UPDATE users SET secret = $1 WHERE id = $2`, [secret, id]);
+    await pool.query(`UPDATE users_auth SET secret = $1 WHERE id = $2`, [secret, id]);
     res.redirect("/secrets");
   } catch (err) {
     console.error(err);
@@ -102,14 +102,14 @@ app.post("/register", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
   try {
-    const result = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
+    const result = await pool.query(`SELECT * FROM users_auth WHERE email = $1`, [email]);
     const user = result.rows[0];
     if (user) {
       return res.status(400).send("User already exists");
     } else {
       const hash = await bcrypt.hash(password, saltRounds);
       const newUserResult = await pool.query(`
-        INSERT INTO users (email, password)
+        INSERT INTO users_auth (email, password)
         VALUES ($1, $2)
         RETURNING *`,
         [email, hash]
@@ -139,7 +139,7 @@ passport.use("local",
   new LocalStrategy(
     async (username, password, done) => {
       try {
-        const result = await pool.query(`SELECT * FROM users WHERE email = $1`, [username]);
+        const result = await pool.query(`SELECT * FROM users_auth WHERE email = $1`, [username]);
         const user = result.rows[0];
 
         if (!user) {
@@ -170,11 +170,11 @@ passport.use("google",
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       const email = profile.emails[0].value;
-      const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+      const user = await pool.query("SELECT * FROM users_auth WHERE email = $1", [email]);
       if (user.rows.length > 0) {
         return done(null, user.rows[0]);
       }
-      const newUser = await pool.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", [email, "google"]);
+      const newUser = await pool.query("INSERT INTO users_auth (email, password) VALUES ($1, $2) RETURNING *", [email, "google"]);
       done(null, newUser.rows[0]);
     } catch (err) {
       done(err);
@@ -188,7 +188,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    const result = await pool.query("SELECT * FROM users_auth WHERE id = $1", [id]);
     const user = result.rows[0];
     if (!user) return done(null, false);
     done(null, user);
