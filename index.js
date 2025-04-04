@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 const saltRounds = 10;
 
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
