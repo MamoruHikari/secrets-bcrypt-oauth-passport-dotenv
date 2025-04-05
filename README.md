@@ -1,6 +1,6 @@
 # 🔐 Secrets Auth App
 
-Access the live site here: **[Secrets Auth App](https://secrets-bcrypt-oauth-passport-dotenv.onrender.com)**
+Access the live app here: **[Secrets Auth](https://secrets-bcrypt-oauth-passport-dotenv.onrender.com)**
 
 Note: It may take up to **60 seconds to load** as the app is hosted on Render's free tier.
 
