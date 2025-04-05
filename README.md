@@ -1,8 +1,10 @@
 # 🔐 Secrets Auth App
 
-[**🌐 Live Demo**  
-https://secrets-bcrypt-oauth-passport-dotenv.onrender.com  
-⚠️ Note: Due to Render's free tier, the server may take up to **60 seconds to start.** Please be patient on first load.]
+## **Deployed Application**
+
+Access the live site here: **[Secrets Auth App](https://secrets-bcrypt-oauth-passport-dotenv.onrender.com)**
+
+Note: It may take up to **60 seconds to load** as the app is hosted on Render's free tier.
 
 ---
 
