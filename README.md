@@ -24,8 +24,8 @@ It uses **Node.js**, **Express**, **Passport.js**, **PostgreSQL**, and **bcrypt*
 - **Frontend**: EJS templating, HTML/CSS
 - **Backend**: Node.js, Express
 - **Authentication**: Passport.js (Local + Google OAuth2 Strategy)
-- **Security**: Bcrypt (password hashing), Sessions, dotenv
-- **Database**: PostgreSQL (hosted on Render or Neon.tech)
+- **Security**: Bcrypt (password hashing), Sessions, Dotenv
+- **Database**: PostgreSQL (hosted on Neon.tech)
 - **Deployment**: Render.com (free tier)
 
 ---
@@ -40,12 +40,6 @@ It uses **Node.js**, **Express**, **Passport.js**, **PostgreSQL**, and **bcrypt*
 - 🗄️ PostgreSQL for persistent storage
 - ✍️ Users can submit and edit one secret per account
 - ⏳ Authenticated-only access to `/secrets` and `/submit`
-
----
-
-## 📸 Screenshots
-
-Coming soon…
 
 ---
 
@@ -64,97 +58,6 @@ secrets-bcrypt-oauth-passport-dotenv/
 ├── package.json
 └── .env (not committed)
 ```
-
----
-
-## 🔑 .env Example
-
-Create a `.env` file in the root of your project with the following variables:
-
-```env
-PORT=3000
-DATABASE_URL=postgresql://your-user:your-password@your-host/your-db-name?sslmode=require
-SESSION_SECRET=your_session_secret_here
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-```
-
-**⚠️ Important:** Never commit your `.env` file to version control!
-
----
-
-## 🧪 Local Development Setup
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/your-username/secrets-bcrypt-oauth-passport-dotenv.git
-cd secrets-bcrypt-oauth-passport-dotenv
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Add your `.env` file (see example above)
-
-### 4. Run the app locally
-
-```bash
-node index.js
-```
-
-Visit `http://localhost:3000` in your browser.
-
----
-
-## 🧰 Database Setup
-
-Make sure to create a PostgreSQL database with a table called `users_auth`:
-
-```sql
-CREATE TABLE users_auth (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  secret TEXT
-);
-```
-
----
-
-## 🌐 Google OAuth Setup
-
-1. Go to [Google Developer Console](https://console.developers.google.com/)
-2. Create a new project or select an existing one
-3. Navigate to **Credentials** → Create **OAuth client ID**
-4. Set application type: **Web application**
-5. Add this authorized redirect URI:  
-   ```
-   https://secrets-bcrypt-oauth-passport-dotenv.onrender.com/auth/google/secrets
-   ```
-6. Save your **Client ID** and **Client Secret** in `.env`
-
----
-
-## 📡 Deployment (Render)
-
-1. Push your code to GitHub
-2. Go to [Render.com](https://render.com/)
-3. Click **New +** → **Web Service**
-4. Connect your GitHub repo
-5. Set build command:  
-   ```
-   npm install
-   ```
-6. Set start command:  
-   ```
-   node index.js
-   ```
-7. Add all necessary environment variables in Render’s **Environment tab**
-8. Hit **Deploy**
 
 ---
 
