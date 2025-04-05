@@ -48,7 +48,12 @@ It uses **Node.js**, **Express**, **Passport.js**, **PostgreSQL**, and **bcrypt*
 ```
 secrets-bcrypt-oauth-passport-dotenv/
 ├── public/
+│   └── css/
+│       └── style.css
 ├── views/
+│   ├── partials/
+│   │   ├── header.ejs
+│   │   └── footer.ejs
 │   ├── home.ejs
 │   ├── login.ejs
 │   ├── register.ejs
