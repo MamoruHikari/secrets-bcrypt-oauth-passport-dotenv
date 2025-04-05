@@ -15,7 +15,7 @@ This is a full-stack authentication app where users can:
 - Submit a **secret message**
 - View their secret securely on their private page
 
-It uses **Node.js**, **Express**, **Passport.js**, **PostgreSQL**, and **bcrypt** for hashing passwords. Secrets are stored securely in a PostgreSQL database.
+It uses **Node.js**, **Express**, **Passport.js**, **PostgreSQL**, and **bcrypt** for hashing passwords. Both login credentials, hashed passwords, and secrets are securely stored in a PostgreSQL database.
 
 ---
 
